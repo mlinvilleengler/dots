@@ -1,29 +1,43 @@
 import React, { Component } from 'react'
 import Dot from './Components/Dot'
+import Toolbar from './Components/Toolbar'
 import uuid from 'uuid/v4'
-import './App.css'
+import Landscape from './Components/Landscape'
 
 class App extends Component {
   constructor () {
     super()
 
     this.state = {
-      gameEngineRef: undefined,
+      addDotIntervalId: undefined,
+      dotAnimationId: undefined,
       gameActive: false,
-      dots: {},
+      dots: [],
       score: 0,
-      speed: 1
+      actualScore: 0,
+      speed: 1 / 10
     }
   }
 
   toggleGameActiveState = () => {
+    let addDotIntervalId
+
     if (!this.state.gameActive) {
-      this.gameEngineRef = setInterval(this.addDot, 5000)
+      addDotIntervalId = setInterval(this.addDot, 1000)
+      this.animateDots()
     } else {
-      clearInterval(this.gameEngineRef)
+      clearInterval(this.state.addDotIntervalId)
+      cancelAnimationFrame(this.state.dotAnimationId)
     }
 
-    this.setState(prevState => ({ gameActive: !prevState.gameActive }))
+    this.setState(prevState => ({
+      addDotIntervalId,
+      gameActive: !prevState.gameActive
+    }))
+  }
+
+  setSpeed = speed => {
+    this.setState({ speed: speed / 10 })
   }
 
   addDot = () => {
@@ -33,61 +47,119 @@ class App extends Component {
 
     const location = Math.floor(Math.random() * (100 - size))
 
-    const points = 10 / size
+    const points = Math.floor(20 / size * 100)
 
     this.setState(prevState => {
-      const dots = {
-        ...prevState.dots
-      }
-
-      dots[id] = {
+      const dot = {
         id,
         size,
         location,
         points,
-        speed: this.state.speed
+        verticalLocation: 0 - size
       }
 
-      return { dots }
+      return { dots: [...prevState.dots, dot] }
     })
   }
 
-  dotHandler = (id, points = 0) => {
-    this.setState(prevState => {
-      const dots = { ...prevState.dots }
+  setScore = points => {
+    this.setState(prevState => ({
+      actualScore: prevState.actualScore + points
+    }))
 
-      delete dots[id]
-
-      const newScore = (prevState.score += points)
-
-      return {
-        dots,
-        newScore
+    const updateScoreRecursively = () => {
+      if (this.state.score >= this.state.actualScore) {
+        return
       }
+
+      this.setState(prevState => ({ score: prevState.score + 1 }))
+      return requestAnimationFrame(updateScoreRecursively)
+    }
+
+    return requestAnimationFrame(updateScoreRecursively)
+  }
+
+  dotHandler = (index, points = 0) => {
+    if (points) {
+      this.setScore(points)
+    }
+
+    this.setState(prevState => {
+      const dots = [...prevState.dots]
+      dots.splice(index, 1)
+      return {
+        dots
+      }
+    })
+  }
+
+  animateDots = () => {
+    // get new values for dots
+    const fn = () => {
+      this.setState(prevState => {
+        let { speed, gameActive, dots } = prevState
+
+        dots = dots
+          .map(dot => {
+            if (dot.verticalLocation > 100 + dot.size) {
+              /* prepare for removal */
+              dot.remove = true
+              return dot
+            }
+
+            if (gameActive) {
+              dot.verticalLocation = dot.verticalLocation += speed
+            }
+            return dot
+          })
+          .filter(dot => dot.remove !== true)
+
+        return { dots }
+      })
+
+      const dotAnimationId = requestAnimationFrame(fn)
+
+      // set dot state
+      this.setState({
+        dotAnimationId
+      })
+    }
+
+    const dotAnimationId = requestAnimationFrame(fn)
+
+    this.setState({
+      dotAnimationId
     })
   }
 
   renderDots = () => {
-    return Object.keys(this.state.dots).map(dotId => (
+    return this.state.dots.map((dot, index) => (
       <Dot
-        key={dotId}
-        {...this.state.dots[dotId]}
+        index={index}
+        key={dot.id}
+        {...dot}
         dotHandler={this.dotHandler}
         gameActive={this.state.gameActive}
+        speed={this.state.speed}
       />
     ))
   }
 
   render () {
-    const buttonText = this.state.gameActive ? 'PAUSE' : 'START'
-
     // console.log(Dot)
 
     return (
-      <div className='App'>
-        <button onClick={this.toggleGameActiveState}>{buttonText}</button>
+      <React.Fragment>
+        <Toolbar
+          speed={this.state.speed}
+          score={this.state.score}
+          gameActive={this.state.gameActive}
+          toggleGameActiveState={this.toggleGameActiveState}
+          setSpeed={this.setSpeed}
+        />
         {this.renderDots()}
-      </div>
+        <Landscape />
+      </React.Fragment>
     )
   }
 }
