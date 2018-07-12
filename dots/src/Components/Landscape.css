@@ -1,5 +1,5 @@
 .hill {
-  position: fixed;
+  position: absolute;
   transform: rotate(45deg);
 }
 
