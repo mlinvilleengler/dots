@@ -4,10 +4,6 @@ import reducer from './reducer'
 
 const middlewares = [thunk]
 
-// if (true) {
-//   middlewares.push(require('redux-logger').logger)
-// }
-
 export const store = createStore(reducer, null, applyMiddleware(...middlewares))
 
 export default { store }

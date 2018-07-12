@@ -26,7 +26,7 @@ class Landscape extends Component {
 
   getRandomHillOptions = () => {
     const left = Math.floor(Math.random() * 140 - 40)
-    const size = Math.floor(Math.random() * 100)
+    const size = Math.floor(Math.random() * 10)
     const zIndex = Math.floor(Math.random() * 10)
     const colors = new Array(3)
       .fill(0)
@@ -34,6 +34,13 @@ class Landscape extends Component {
     const backgroundColor = `rgb(${colors.join()})`
     const borderRadius = Math.floor(Math.random() * 7 + 2)
     const opacity = Math.random() + 0.75
+    const innerWidth = window.innerWidth
+    let bottomStep = -0.4
+    if (innerWidth > 700) {
+      bottomStep = -0.55
+    } else if (innerWidth > 1000) {
+      bottomStep = -0.75
+    }
 
     return {
       zIndex,
@@ -41,7 +48,7 @@ class Landscape extends Component {
       opacity,
       borderRadius: borderRadius + '%',
       left: left + 'vw',
-      bottom: size * -0.75 + 'vh',
+      bottom: size * bottomStep + 'vh',
       width: size + 'vw',
       height: size * 0.75 + 'vh'
     }
