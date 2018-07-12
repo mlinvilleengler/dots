@@ -26,7 +26,7 @@ class Landscape extends Component {
 
   getRandomHillOptions = () => {
     const left = Math.floor(Math.random() * 140 - 40)
-    const size = Math.floor(Math.random() * 10)
+    const size = Math.floor(Math.random() * 100)
     const zIndex = Math.floor(Math.random() * 10)
     const colors = new Array(3)
       .fill(0)
