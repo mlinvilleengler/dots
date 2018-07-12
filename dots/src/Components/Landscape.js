@@ -35,10 +35,11 @@ class Landscape extends Component {
     const borderRadius = Math.floor(Math.random() * 7 + 2)
     const opacity = Math.random() + 0.75
     const innerWidth = window.innerWidth
-    let bottomStep = -0.4
+    let bottomStep = -0.5
     if (innerWidth > 700) {
-      bottomStep = -0.55
-    } else if (innerWidth > 1000) {
+      bottomStep = -0.6
+    }
+    if (innerWidth > 1000) {
       bottomStep = -0.75
     }
 
