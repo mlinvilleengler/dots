@@ -1,31 +1,33 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { toggleGameActiveState } from '../redux/control-actions'
 import Slider from './Slider'
 import './Toolbar.css'
 
-class Toolbar extends Component {
-  constructor (props) {
-    super(props)
+const mapStateToProps = ({ animatingScore, gameActive }) => ({
+  animatingScore,
+  gameActive
+})
 
-    this.state = {}
-  }
+const mapDispatchToProps = dispatch => ({
+  toggleGameState: () => dispatch(toggleGameActiveState())
+})
 
-  render () {
-    const { score } = this.props
-    const buttonText = this.props.gameActive ? 'PAUSE' : 'START'
+export const Toolbar = ({ animatingScore, gameActive, toggleGameState }) => {
+  const buttonText = gameActive ? 'PAUSE' : 'START'
 
-    return (
-      <nav>
-        <section className='toolbar-section'>
-          <h3>AWESOME COW</h3>
-          <h3 role={'text'} aria-label='total game points'>{score}</h3>
-          <button onClick={this.props.toggleGameActiveState}>
-            {buttonText}
-          </button>
-        </section>
-        <Slider speed={this.props.speed} setSpeed={this.props.setSpeed} />
-      </nav>
-    )
-  }
+  return (
+    <nav>
+      <section className='toolbar-section'>
+        <h3>AWESOME COW</h3>
+        <h3 role={'text'} aria-label='total game points'>{animatingScore}</h3>
+        <button onClick={toggleGameState}>
+          {buttonText}
+        </button>
+      </section>
+      <Slider />
+    </nav>
+  )
 }
 
-export default Toolbar
+export default connect(mapStateToProps, mapDispatchToProps)(Toolbar)
