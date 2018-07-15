@@ -5,29 +5,34 @@ import { setSpeed } from '../redux/control-actions'
 import 'rc-slider/assets/index.css'
 import './Slider.css'
 
-const mapStateToProps = ({ speed }) => ({ speed })
+const mapStateToProps = ({ speed, config }) => ({
+  speed,
+  min: config.gameSpeed.min,
+  max: config.gameSpeed.max,
+  label: config.content.toolbar.sliderLabel
+})
 
 const mapDispatchToProps = dispatch => ({
   handleChange: speed => dispatch(setSpeed(speed))
 })
 
-export const Slider = ({ speed, handleChange }) => (
+const _Slider = ({ speed, handleChange, max, min, label }) => (
   <section
     className='slider-container'
     role='slider'
-    aria-valuemax={40}
-    aria-valuemin={1}
+    aria-valuemax={max}
+    aria-valuemin={min}
     aria-valuenow={speed}
   >
     <SimpleSlider
       name='speed-slider'
-      min={1}
-      max={40}
+      min={min}
+      max={max}
       onChange={handleChange}
       defaultValue={speed}
     />
-    <label>SPEED</label>
+    <label>{label}</label>
   </section>
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(Slider)
+export const Slider = connect(mapStateToProps, mapDispatchToProps)(_Slider)

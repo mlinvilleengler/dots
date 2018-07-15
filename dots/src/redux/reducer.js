@@ -1,13 +1,16 @@
 import * as type from './types'
+import { config } from '../config'
 
 const defaultState = {
+  config,
   addDotIntervalId: undefined,
   dotAnimationId: undefined,
   gameActive: false,
   dots: [],
   score: 0,
   animatingScore: 0,
-  speed: 1 / 10
+  speed: config.gameSpeed.default,
+  infoVisibility: true
 }
 
 export const reducer = (state = {}, action) => {
@@ -25,5 +28,3 @@ export const reducer = (state = {}, action) => {
       }
   }
 }
-
-export default reducer

@@ -1,7 +1,7 @@
 import { SET_STATE } from './types'
 
 const animateDotsRecursively = (dispatch, getState) => {
-  const { speed, gameActive, dots } = getState()
+  const { speed, gameActive, dots, config } = getState()
   let newDots = []
 
   dots.forEach(dot => {
@@ -11,7 +11,8 @@ const animateDotsRecursively = (dispatch, getState) => {
       return
     }
     if (gameActive) {
-      newDot.verticalLocation = dot.verticalLocation + speed
+      newDot.verticalLocation =
+        dot.verticalLocation + speed * config.gameSpeed.vhToSpeedRatio
     }
     newDots.push(newDot)
   })

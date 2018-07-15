@@ -2,9 +2,14 @@ import { SET_STATE } from './types'
 import { addDot } from './dot-actions'
 import { animateDots } from './animate-actions'
 
+export const toggleInfoVisibility = infoVisibility => ({
+  type: SET_STATE,
+  data: { infoVisibility: !infoVisibility }
+})
+
 export const setSpeed = speed => ({
   type: SET_STATE,
-  data: { speed: speed / 10 }
+  data: { speed: speed }
 })
 
 export const toggleGameActiveState = () => (dispatch, getState) => {

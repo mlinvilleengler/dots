@@ -3,16 +3,18 @@ import { connect } from 'react-redux'
 import { removeDot } from '../redux/dot-actions'
 import './Dot.css'
 
-const mapStateToProps = ({ gameActive }) => ({ gameActive })
+const mapStateToProps = ({ gameActive, config }) => ({ gameActive, config })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
   const { dispatch } = dispatchProps
-  const { index, location, verticalLocation, size } = ownProps
+  const { index, location, verticalLocation, size, transform } = ownProps
 
   return {
     location,
     verticalLocation,
+    transform,
     size,
+    icon: stateProps.config.dots.mainIcon,
     clickHandler: () => {
       if (!stateProps.gameActive) {
         return
@@ -22,7 +24,14 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
   }
 }
 
-const Dot = ({ location, verticalLocation, size, clickHandler }) => {
+const _Dot = ({
+  location,
+  verticalLocation,
+  size,
+  clickHandler,
+  icon,
+  transform
+}) => {
   const onKeyDown = event => {
     if (event.key === 'Enter') {
       event.preventDefault()
@@ -32,22 +41,24 @@ const Dot = ({ location, verticalLocation, size, clickHandler }) => {
   }
 
   return (
-    <div
-      className='Dot'
+    <img
+      className='dot'
       style={{
-        height: size + 'vw',
-        width: size + 'vw',
+        height: size + 'vh',
+        width: 'auto',
         top: verticalLocation + 'vh',
         left: location + 'vw',
-        borderRadius: size / 2 + 'vw'
+        transform: `scaleX(${transform})`
       }}
       onClick={clickHandler}
       onKeyDown={onKeyDown}
       role='button'
-      aria-label='game-ball, click me to get points'
+      aria-label='game-item, click me to get points'
       tabIndex={0}
+      alt='game-item, click me to get points'
+      src={icon}
     />
   )
 }
 
-export default connect(mapStateToProps, null, mergeProps)(Dot)
+export const Dot = connect(mapStateToProps, null, mergeProps)(_Dot)

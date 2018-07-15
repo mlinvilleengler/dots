@@ -1,5 +1,4 @@
-.Dot {
-  background-color: black;
+.dot {
   position: absolute;
   z-index: 10;
 }
