@@ -25,18 +25,20 @@ The game was easy to structure and extend using react-redux design patterns.
 Rendering is occasionally janky. I believe that is caused by these reasons: 
  - The game state/dot animation is updating using requestAnimationFrame but react doesn't update the dom using requestAnimationFrame.
  - It updates when it's ready so i believe this timing sequence occasionally causes a small amount of jank.
+ 
 In the future I would like to develop a similar game using redux and canvas and potentially pixi. http://www.pixijs.com/
 It would be very interesting building this game in 3d using playcanvas. https://playcanvas.com/
 
 ## TODO
-# Publish to git pages
-# Add Tests
-# Add Flow
-# Improve click animation for dot
-# Add toggle for a11y
-# Add colors for cows
-# lint css
-# Improve responsiveness/UX for toolbar/navigation
-# Add multiplayer
-# Add db leaderboard
-# Implement keyboard controls for a more exciting a11y experience 
+
+  Publish to git pages
+  Add Tests
+  Add Flow
+  Improve click animation for dot
+  Add toggle for a11y
+  Add colors for cows
+  lint css
+  Improve responsiveness/UX for toolbar/navigation
+  Add multiplayer
+  Add db leaderboard
+  Implement keyboard controls for a more exciting a11y experience 
