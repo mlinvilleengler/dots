@@ -1,5 +1,5 @@
 import React from 'react'
-import cow from './cow.png'
+import cow from './assets/cow.png'
 
 export const config = Object.freeze({
   content: {
