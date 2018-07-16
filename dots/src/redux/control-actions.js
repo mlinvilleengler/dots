@@ -13,11 +13,17 @@ export const setSpeed = speed => ({
 })
 
 export const toggleGameActiveState = () => (dispatch, getState) => {
-  let { gameActive, addDotIntervalId, dotAnimationId } = getState()
+  let {
+    gameActive,
+    addDotIntervalId,
+    dotAnimationId,
+    infoVisibility
+  } = getState()
 
   if (!gameActive) {
     addDotIntervalId = setInterval(() => dispatch(addDot()), 1000)
     dispatch(animateDots())
+    infoVisibility = false
   } else {
     clearInterval(addDotIntervalId)
     cancelAnimationFrame(dotAnimationId)
@@ -27,6 +33,7 @@ export const toggleGameActiveState = () => (dispatch, getState) => {
     type: SET_STATE,
     data: {
       addDotIntervalId,
+      infoVisibility,
       gameActive: !gameActive
     }
   })

@@ -54,7 +54,7 @@ const _Toolbar = ({
     <Info />
     <section className='toolbar_section'>
       <h3 className='toolbar_text'>{header}</h3>
-      <h3 className='toolbar_text' role={'text'} aria-label='total game points'>
+      <h3 className='toolbar_text' aria-label='total game points'>
         {animatingScore}
       </h3>
       <button className='toolbar_button' onClick={toggleGameState}>

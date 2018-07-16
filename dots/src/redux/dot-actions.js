@@ -3,7 +3,12 @@ import { SET_STATE } from './types'
 import { setScore } from './score-actions'
 
 export const addDot = () => (dispatch, getState) => {
-  const { max, min } = getState().config.dots.size
+  let { max, min, mobileIncrease } = getState().config.dots.size
+  if (window.innerWidth < 550) {
+    max += mobileIncrease
+    min += mobileIncrease
+  }
+
   const id = uuid()
   const size = Math.floor(Math.random() * (max - min) + min)
   const location = Math.floor(Math.random() * (100 - size))
@@ -26,7 +31,7 @@ export const addDot = () => (dispatch, getState) => {
   })
 }
 
-export const removeDot = (index, size = null) => (dispatch, getState) => {
+export const removeDot = (id, size = null) => (dispatch, getState) => {
   const { speed, dots } = getState()
 
   if (size) {
@@ -34,8 +39,7 @@ export const removeDot = (index, size = null) => (dispatch, getState) => {
     dispatch(setScore(calculatedPoints))
   }
 
-  const newDots = [...dots]
-  newDots.splice(index, 1)
+  const newDots = [...dots].filter(dot => dot.id !== id)
 
   return dispatch({
     type: SET_STATE,

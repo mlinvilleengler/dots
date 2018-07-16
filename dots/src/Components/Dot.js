@@ -1,64 +1,76 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { removeDot } from '../redux/dot-actions'
+import classnames from 'classnames'
 import './Dot.css'
 
 const mapStateToProps = ({ gameActive, config }) => ({ gameActive, config })
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const { config, gameActive } = stateProps
   const { dispatch } = dispatchProps
-  const { index, location, verticalLocation, size, transform } = ownProps
+  const { location, verticalLocation, size, transform, id } = ownProps
 
   return {
+    gameActive,
     location,
     verticalLocation,
     transform,
     size,
-    icon: stateProps.config.dots.mainIcon,
+    icon: config.dots.mainIcon,
     clickHandler: () => {
-      if (!stateProps.gameActive) {
-        return
-      }
-      dispatch(removeDot(index, size))
+      dispatch(removeDot(id, size))
     }
   }
 }
 
-const _Dot = ({
-  location,
-  verticalLocation,
-  size,
-  clickHandler,
-  icon,
-  transform
-}) => {
-  const onKeyDown = event => {
+class _Dot extends Component {
+  state = {
+    animating: false
+  }
+
+  onKeyDown = event => {
     if (event.key === 'Enter') {
       event.preventDefault()
       event.stopPropagation()
-      clickHandler()
+      this.clickHandler()
     }
   }
 
-  return (
-    <img
-      className='dot'
-      style={{
-        height: size + 'vh',
-        width: 'auto',
-        top: verticalLocation + 'vh',
-        left: location + 'vw',
-        transform: `scaleX(${transform})`
-      }}
-      onClick={clickHandler}
-      onKeyDown={onKeyDown}
-      role='button'
-      aria-label='game-item, click me to get points'
-      tabIndex={0}
-      alt='game-item, click me to get points'
-      src={icon}
-    />
-  )
+  clickHandler = () => {
+    if (!this.props.gameActive) {
+      return
+    }
+    this.setState({ animating: true })
+    setTimeout(this.props.clickHandler, 1000)
+  }
+
+  render () {
+    const { location, verticalLocation, size, icon, transform } = this.props
+
+    return (
+      <img
+        className={classnames('dot', {
+          animated: this.state.animating,
+          fadeOutUpBig: this.state.animating
+        })}
+        style={{
+          height: size + 'vh',
+          width: 'auto',
+          top: verticalLocation + 'vh',
+          left: location + 'vw',
+          transform: `scaleX(${transform})`
+        }}
+        onClick={this.clickHandler}
+        onKeyDown={this.onKeyDown}
+        role='button'
+        aria-label='game-item, click me to get points'
+        tabIndex={0}
+        alt='game-item, click me to get points'
+        src={icon}
+      />
+    )
+  }
 }
 
 export const Dot = connect(mapStateToProps, null, mergeProps)(_Dot)

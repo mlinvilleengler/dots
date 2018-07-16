@@ -32,8 +32,9 @@ export const config = Object.freeze({
   dots: {
     mainIcon: cow,
     size: {
-      min: 15,
-      max: 50
+      min: 1,
+      max: 25,
+      mobileIncrease: 5
     }
   },
   landscape: {
