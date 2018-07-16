@@ -31,7 +31,7 @@ Rendering is occasionally janky. I believe that is caused by these reasons:
  * It updates when it's ready so i believe this timing sequence occasionally causes a small amount of jank.
  
 In the future I would like to develop a similar game using redux and canvas and potentially pixi. http://www.pixijs.com/\
-It would be very interesting building this game in 3d using playcanvas. https://playcanvas.com/\
+It would be very interesting building this game in 3d using playcanvas. https://playcanvas.com/
 
 ## TODO
 
