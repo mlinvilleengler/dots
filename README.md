@@ -3,7 +3,7 @@
 #### https://mlinvilleengler.github.io/dots/
 
 Welcome to the dot game.\
-A game where objects fall from the top of the screen and users can catch them to earn points by clinking them.\
+A game where objects fall from the top of the screen and users can catch them to earn points by clicking them.\
 The game is set up with a configuration file so that it can be easily changed for different themes.\
 It is currently themed for parachuting `Awesome` cows set upon a mountainous landscape.\
 You may notice that the user is awarded a different and unique mountain landscape each time they come back to the game. \
