@@ -13,6 +13,8 @@ Have fun and mark any issues/ideas in the git/issues section.\
 
 ## Screenshots
 
+![alt text](https://github.com/mlinvilleengler/dots/raw/master/public/dots.png "Dots")
+
 ## Info
 
 To Run and Develop The Application:
