@@ -9,7 +9,7 @@ It is currently themed for parachuting `Awesome` cows set upon a mountainous lan
 You may notice that the user is awarded a different and unique mountain landscape each time they come back to the game. \
 The game was designed with accessibility in mind and you will notice the blue focus box around any focused element.\
 The game isn't perfect and there are a number of ways it can be improved.\
-Have fun and mark any issues/ideas in the git/issues section.\
+Have fun and mark any issues/ideas in the git/issues section.
 
 ## Screenshots
 
