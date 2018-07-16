@@ -1,5 +1,7 @@
 ## Dot Game
 
+#### https://mlinvilleengler.github.io/dots/
+
 Welcome to the dot game.\
 A game where objects fall from the top of the screen and users can catch them to earn points by clinking them.\
 The game is set up with a configuration file so that it can be easily changed for different themes.\
