@@ -90,7 +90,11 @@ class _Toolbar extends Component {
         <button className='toolbar_icon' onClick={toggleInfoVisibility}>
           {infoIcon}
         </button>
-        <h3 className='toolbar_text' aria-label='total game points'>
+        <h3
+          className='toolbar_text'
+          style={{ minWidth: '100px' }}
+          aria-label='total game points'
+        >
           {animatingScore}
         </h3>
         {minimizeToggle}
