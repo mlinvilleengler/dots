@@ -36,9 +36,8 @@ It would be very interesting building this game in 3d using playcanvas. https://
 ## TODO
 
   * Add Tests
-  * Add Flow
+  * Add Flow Type
   * Improve click animation for dot
-  * Add toggle for a11y
   * Add colors for cows
   * Improve responsiveness/UX for toolbar/navigation
   * Add multiplayer

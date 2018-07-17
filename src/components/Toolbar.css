@@ -37,11 +37,18 @@
   color: white;
 }
 
-.toolbar_expand-icon {
+.toolbar_icon {
   background-color: transparent;
   border: none;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   margin-top: 8px;  
+}
+
+.toolbar_icon.sticky {
+  position: absolute;
+  top: 22px;
+  right: 5px;
+  margin: 0;
 }

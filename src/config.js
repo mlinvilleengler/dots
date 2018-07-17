@@ -10,8 +10,9 @@ export const config = Object.freeze({
       pauseText: 'PAUSE',
       sliderLabel: 'SPEED',
       switchLabel: 'ACCESSIBILE',
-      expandIcon: <i className='material-icons'>info</i>,
-      minimizeIcon: <i className='material-icons'>expand_less</i>
+      infoIcon: <i className='material-icons'>info</i>,
+      expandIcon: <i className='material-icons'>unfold_more</i>,
+      minimizeIcon: <i className='material-icons'>unfold_less</i>
     },
     info: {
       header: 'AWESOME COW',

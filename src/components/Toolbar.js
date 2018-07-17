@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   toggleGameActiveState,
@@ -21,7 +21,9 @@ const mapStateToProps = ({
   buttonText: gameActive
     ? config.content.toolbar.pauseText
     : config.content.toolbar.startText,
-  expandIcon: config.content.toolbar.expandIcon
+  expandIcon: config.content.toolbar.expandIcon,
+  minimizeIcon: config.content.toolbar.minimizeIcon,
+  infoIcon: config.content.toolbar.infoIcon
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
@@ -31,29 +33,71 @@ const mergeProps = (stateProps, dispatchProps) => ({
     dispatchProps.dispatch(toggleInfoVisibility(stateProps.infoVisibility))
 })
 
-const _Toolbar = ({
-  animatingScore,
-  toggleGameState,
-  toggleInfoVisibility,
-  header,
-  buttonText,
-  expandIcon,
-  sliderOptions
-}) => (
-  <nav className='toolbar'>
-    <h3 className='toolbar_text' style={{ marginRight: '5px' }}>{header}</h3>
-    <button className='toolbar_expand-icon' onClick={toggleInfoVisibility}>
-      {expandIcon}
-    </button>
-    <h3 className='toolbar_text' aria-label='total game points'>
-      {animatingScore}
-    </h3>
-    <Slider />
-    <Switch />
-    <button className='toolbar_button' onClick={toggleGameState}>
-      {buttonText}
-    </button>
-  </nav>
-)
+class _Toolbar extends Component {
+  state = {
+    showMinimizeToggle: true,
+    showOptions: true
+  }
+
+  toggleShowOptions = () => {
+    this.setState(prevState => ({ showOptions: !prevState.showOptions }))
+  }
+
+  render () {
+    const {
+      animatingScore,
+      toggleGameState,
+      toggleInfoVisibility,
+      header,
+      buttonText,
+      expandIcon,
+      minimizeIcon,
+      infoIcon
+    } = this.props
+
+    const { showMinimizeToggle, showOptions } = this.state
+
+    let minimizeToggle
+    if (showMinimizeToggle) {
+      minimizeToggle = (
+        <button
+          className='toolbar_icon sticky'
+          onClick={this.toggleShowOptions}
+        >
+          {showOptions ? minimizeIcon : expandIcon}
+        </button>
+      )
+    }
+
+    let options
+    if (showOptions) {
+      options = (
+        <React.Fragment>
+          <Slider />
+          <Switch />
+          <button className='toolbar_button' onClick={toggleGameState}>
+            {buttonText}
+          </button>
+        </React.Fragment>
+      )
+    }
+
+    return (
+      <nav className='toolbar'>
+        <h3 className='toolbar_text' style={{ marginRight: '5px' }}>
+          {header}
+        </h3>
+        <button className='toolbar_icon' onClick={toggleInfoVisibility}>
+          {infoIcon}
+        </button>
+        <h3 className='toolbar_text' aria-label='total game points'>
+          {animatingScore}
+        </h3>
+        {minimizeToggle}
+        {options}
+      </nav>
+    )
+  }
+}
 
 export const Toolbar = connect(mapStateToProps, null, mergeProps)(_Toolbar)

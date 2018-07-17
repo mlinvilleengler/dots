@@ -47,6 +47,7 @@
   .info-modal {
     width: 100vw;
     height: 100vh;
+    padding: 100px 50px;
   }
 }
 
@@ -62,6 +63,13 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 550px) {
+  .info-modal_button {
+    top: 65px;
+    right: 50px;
+  }
 }
 
 .info-modal_header {
