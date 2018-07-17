@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { toggleInfoVisibility } from '../redux/control-actions'
+import classnames from 'classnames'
 import './Info.css'
 
 const mapStateToProps = ({ config, infoVisibility }) => ({
@@ -18,6 +19,7 @@ const mergeProps = (stateProps, dispatchProps) => ({
 })
 
 const _Info = ({
+  infoVisibility,
   toggleInfoVisibility,
   header,
   buttonText,
@@ -27,14 +29,26 @@ const _Info = ({
   const infoItemElements = infoItems.map(item => <li key={item}>{item}</li>)
 
   return (
-    <section className='info-section'>
-      <button className='info-section_button' onClick={toggleInfoVisibility}>
-        {buttonText}
-      </button>
-      <h2 className='info-section_header'>{header}</h2>
-      <img alt='game logo' className='info-section_icon' src={icon} />
-      <ul className='info-section_list'>{infoItemElements}</ul>
-    </section>
+    <React.Fragment>
+      <div
+        className={classnames('info-modal_mask', { expanded: infoVisibility })}
+        role='presentation'
+        onClick={toggleInfoVisibility}
+      />
+      <dialog
+        className={classnames('info-modal', { expanded: infoVisibility })}
+      >
+        <button className='info-modal_button' onClick={toggleInfoVisibility}>
+          {buttonText}
+        </button>
+        <h2 className='info-modal_header'>
+          {header}
+          <img alt='game logo' className='info-modal_icon' src={icon} />
+        </h2>
+
+        <ul className='info-modal_list'>{infoItemElements}</ul>
+      </dialog>
+    </React.Fragment>
   )
 }
 

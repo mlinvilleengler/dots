@@ -1,0 +1,35 @@
+.switch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.switch-container .rc-switch {
+  height: 14px;
+  width: 30px;
+}
+
+.switch-container .rc-switch-checked {
+  border: 1px solid #abe2fb;
+  background-color: #abe2fb;
+}
+
+.switch-container .rc-switch:after {
+  height: 12px;
+  width: 12px ; 
+  top:0px
+}
+
+.switch-container .rc-switch-checked:after {
+  left: 15px;
+  height: 12px;
+  width: 12px ; 
+  top:0px
+}
+
+.switch-container label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 5px;
+}

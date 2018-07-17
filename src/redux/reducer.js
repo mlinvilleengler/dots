@@ -10,7 +10,8 @@ const defaultState = {
   score: 0,
   animatingScore: 0,
   speed: config.gameSpeed.default,
-  infoVisibility: false
+  infoVisibility: false,
+  accessibile: true
 }
 
 export const reducer = (state = {}, action) => {

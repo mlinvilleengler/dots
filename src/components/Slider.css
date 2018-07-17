@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-around;
-  margin: 5px 28px 15px 28px;
+  width: 350px;
 }
 
 .slider-container .rc-slider {
@@ -11,7 +11,7 @@
   margin-left: 1%;
 }
 
-label {
+.slider-container label {
   font-size: 12px;
   font-weight: 600;
   margin-top: 5px;

@@ -9,7 +9,8 @@ export const config = Object.freeze({
       startText: 'START',
       pauseText: 'PAUSE',
       sliderLabel: 'SPEED',
-      expandIcon: <i className='material-icons'>expand_more</i>,
+      switchLabel: 'ACCESSIBILE',
+      expandIcon: <i className='material-icons'>info</i>,
       minimizeIcon: <i className='material-icons'>expand_less</i>
     },
     info: {

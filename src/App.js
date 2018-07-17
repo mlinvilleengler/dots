@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Dot } from './components/Dot'
 import { Toolbar } from './components/Toolbar'
 import { Landscape } from './components/Landscape'
+import { Info } from './components/Info'
 
 const mapStateToProps = ({ dots, config }) => ({
   dots,
@@ -21,6 +22,7 @@ const _App = ({ dots, landscapeOptions }) => {
         quantity={landscapeOptions.quantity}
         size={landscapeOptions.size}
       />
+      <Info />
     </React.Fragment>
   )
 }

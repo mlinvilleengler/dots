@@ -5,28 +5,23 @@ import {
   toggleInfoVisibility
 } from '../redux/control-actions'
 import { Slider } from './Slider'
-import { Info } from './Info'
-import classnames from 'classnames'
+import { Switch } from './Switch'
 import './Toolbar.css'
 
 const mapStateToProps = ({
   infoVisibility,
   animatingScore,
   gameActive,
-  config,
-  welcomeSectionVisibility
+  config
 }) => ({
   infoVisibility,
   animatingScore,
   gameActive,
-  welcomeSectionVisibility,
   header: config.content.toolbar.header,
   buttonText: gameActive
     ? config.content.toolbar.pauseText
     : config.content.toolbar.startText,
-  expandIcon: infoVisibility
-    ? config.content.toolbar.minimizeIcon
-    : config.content.toolbar.expandIcon
+  expandIcon: config.content.toolbar.expandIcon
 })
 
 const mergeProps = (stateProps, dispatchProps) => ({
@@ -37,7 +32,6 @@ const mergeProps = (stateProps, dispatchProps) => ({
 })
 
 const _Toolbar = ({
-  infoVisibility,
   animatingScore,
   toggleGameState,
   toggleInfoVisibility,
@@ -46,24 +40,18 @@ const _Toolbar = ({
   expandIcon,
   sliderOptions
 }) => (
-  <nav
-    className={classnames('toolbar', {
-      expanded: infoVisibility
-    })}
-  >
-    <Info />
-    <section className='toolbar_section'>
-      <h3 className='toolbar_text'>{header}</h3>
-      <h3 className='toolbar_text' aria-label='total game points'>
-        {animatingScore}
-      </h3>
-      <button className='toolbar_button' onClick={toggleGameState}>
-        {buttonText}
-      </button>
-    </section>
-    <Slider />
+  <nav className='toolbar'>
+    <h3 className='toolbar_text' style={{ marginRight: '5px' }}>{header}</h3>
     <button className='toolbar_expand-icon' onClick={toggleInfoVisibility}>
       {expandIcon}
+    </button>
+    <h3 className='toolbar_text' aria-label='total game points'>
+      {animatingScore}
+    </h3>
+    <Slider />
+    <Switch />
+    <button className='toolbar_button' onClick={toggleGameState}>
+      {buttonText}
     </button>
   </nav>
 )
