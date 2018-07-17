@@ -14,6 +14,7 @@ Have fun and mark any issues/ideas in the git/issues section.
 ## Screenshots
 
 ![Dots (Awesome Cow)](https://github.com/mlinvilleengler/dots/raw/master/public/dots_small.png "Dots (Awesome Cow)")
+![Dots (Awesome Cow)](https://github.com/mlinvilleengler/dots/raw/master/public/dots_small1.png "Dots (Awesome Cow)")
 
 ## Info
 
