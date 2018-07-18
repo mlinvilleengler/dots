@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
+  restart,
   toggleGameActiveState,
   toggleInfoVisibility
 } from '../redux/control-actions'
@@ -21,6 +22,7 @@ const mapStateToProps = ({
   buttonText: gameActive
     ? config.content.toolbar.pauseText
     : config.content.toolbar.startText,
+  restartText: config.content.toolbar.restartText, 
   expandIcon: config.content.toolbar.expandIcon,
   minimizeIcon: config.content.toolbar.minimizeIcon,
   infoIcon: config.content.toolbar.infoIcon
@@ -28,6 +30,7 @@ const mapStateToProps = ({
 
 const mergeProps = (stateProps, dispatchProps) => ({
   ...stateProps,
+  restart: () => dispatchProps.dispatch(restart()),  
   toggleGameState: () => dispatchProps.dispatch(toggleGameActiveState()),
   toggleInfoVisibility: () =>
     dispatchProps.dispatch(toggleInfoVisibility(stateProps.infoVisibility))
@@ -46,10 +49,12 @@ class _Toolbar extends Component {
   render () {
     const {
       animatingScore,
+      restart,
       toggleGameState,
       toggleInfoVisibility,
       header,
       buttonText,
+      restartText,
       expandIcon,
       minimizeIcon,
       infoIcon
@@ -78,6 +83,9 @@ class _Toolbar extends Component {
           <button className='toolbar_button' onClick={toggleGameState}>
             {buttonText}
           </button>
+          <button className='toolbar_button' onClick={restart}>
+            {restartText}
+          </button>
         </React.Fragment>
       )
     }
@@ -92,7 +100,7 @@ class _Toolbar extends Component {
         </button>
         <h3
           className='toolbar_text'
-          style={{ minWidth: '100px' }}
+          style={{ minWidth: '75px' }}
           aria-label='total game points'
         >
           {animatingScore}

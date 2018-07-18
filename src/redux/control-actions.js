@@ -21,6 +21,11 @@ const removeFocusStyleTag = () => {
   styleTag && styleTag.parentNode.removeChild(styleTag)
 }
 
+export const restart = speed => ({
+  type: SET_STATE,
+  data: { dots: [], score: 0, animatingScore: 0 }
+})
+
 export const toggleInfoVisibility = infoVisibility => ({
   type: SET_STATE,
   data: { infoVisibility: !infoVisibility }

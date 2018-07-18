@@ -8,6 +8,7 @@ export const config = Object.freeze({
       header: 'AWESOME COW',
       startText: 'START',
       pauseText: 'PAUSE',
+      restartText: 'RESTART',
       sliderLabel: 'SPEED',
       switchLabel: 'ACCESSIBILE',
       infoIcon: <i className='material-icons'>info</i>,
